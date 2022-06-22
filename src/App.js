@@ -1,24 +1,35 @@
 import logo from './logo.svg';
 import Nav from './components/Nav';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  let [emptyInput, setemptyInput] = useState('');
+  let [Name, setName] = useState('');
+
+  const handleEventChange = (event) => {
+    setemptyInput(event.target.value);
+  }
+
+  const handleEventClick = (event) => {
+    setName(emptyInput);
+  }
+
   return (
     <div className="App">
       <Nav />
       <header className="App-header">
+
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          My name is {Name}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+        <input type="text" value={emptyInput} onChange={(event) => { handleEventChange(event) }} />
+
+        <input type="button" value="Click Me" onClick={(event) => { handleEventClick(event) }} />
+
       </header>
     </div>
   );
