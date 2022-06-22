@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import Nav from './components/Nav';
 import './App.css';
+import Todo from './components/Todo';
 import { useState } from 'react';
 
 function App() {
@@ -39,18 +40,7 @@ function App() {
           List Todo
         </p>
 
-        <table className='todos-content'>
-          <tbody>
-            {todos && todos.length > 0 && todos.map((item, index) => {
-              return (
-                <tr className='todo-child' key={item.id}>
-                  <td>{index + 1} -</td>
-                  <td>{item.title}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+        <Todo todos={todos} />
 
         <input type="text" value={emptyInput} onChange={(event) => { handleEventChange(event) }} />
 
