@@ -30,6 +30,12 @@ function App() {
     setemptyInput('');
   }
 
+  const deleteDataTodo = (id) => {
+    let currentTodos = todos;
+    currentTodos = currentTodos.filter(item => item.id !== id)
+    setTodos(currentTodos);
+  }
+
   return (
     <div className="App">
       <Nav />
@@ -40,7 +46,7 @@ function App() {
           List Todo
         </p>
 
-        <Todo todos={todos} />
+        <Todo todos={todos} deleteDataTodo={deleteDataTodo} />
 
         <input type="text" value={emptyInput} onChange={(event) => { handleEventChange(event) }} />
 

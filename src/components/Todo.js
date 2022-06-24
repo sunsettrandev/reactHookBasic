@@ -1,7 +1,10 @@
 
 
 const Todo = (props) => {
-  const todos = props.todos;
+  const { todos, deleteDataTodo } = props;
+  const handleDeleteTodos = (id) => {
+    deleteDataTodo(id)
+  }
   return (
     <table className='todos-content'>
       <tbody>
@@ -10,6 +13,7 @@ const Todo = (props) => {
             <tr className='todo-child' key={item.id}>
               <td>{index + 1} -</td>
               <td>{item.title}</td>
+              <td><span onClick={() => handleDeleteTodos(item.id)}>x</span></td>
             </tr>
           )
         })}
