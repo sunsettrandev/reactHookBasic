@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import Nav from './components/Nav';
 import './App.css';
 import Todo from './components/Todo';
-import { useState } from 'react';
+import Covid19 from './components/Covid19';
+import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -12,6 +13,13 @@ function App() {
     { id: 'todo2', title: 'Doing React.js' },
     { id: 'todo3', title: 'Runing React.js' }
   ]);
+
+  useEffect(() => {
+    console.log('check todos')
+  }, [todos])
+  useEffect(() => {
+    console.log('check input change')
+  }, [emptyInput])
 
   const handleEventChange = (event) => {
     setemptyInput(event.target.value);
@@ -42,7 +50,7 @@ function App() {
       <header className="App-header">
 
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        {/* <p>
           List Todo
         </p>
 
@@ -50,9 +58,13 @@ function App() {
 
         <input type="text" value={emptyInput} onChange={(event) => { handleEventChange(event) }} />
 
-        <input type="button" value="Add New" onClick={(event) => { handleEventClick(event) }} />
+        <input type="button" value="Add New" onClick={(event) => { handleEventClick(event) }} /> */}
+
+        <p>Covid 19 data show</p>
+        <Covid19 />
 
       </header>
+
     </div>
   );
 }
