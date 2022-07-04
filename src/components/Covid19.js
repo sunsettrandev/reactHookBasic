@@ -1,32 +1,10 @@
 import '../scss/Covid19.scss'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import moment from 'moment';
+import useFetch from '../createHook/fetch';
 
 const Covid19 = () => {
 
-  const [dataCovid, setDataCovid] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const fetchAPI = async () => {
-        let res = await axios.get('https://api.covid19api.com/country/vietnam/status/confirmed?from=2022-02-01T00:00:00Z&to=2022-03-01T00:00:00Z');
-        let data = res && res.data ? res.data : [];
-        if (data && data.length > 0) {
-          data.map(item => {
-            item.Date = moment(item.Date).format("llll")
-            return item
-          })
-          data = data.reverse();
-        }
-        setDataCovid(data)
-        setLoading(false)
-      }
-      fetchAPI()
-    }, 2000);
-
-  }, []);
+  const { data: dataCovid, isLoading } =
+    useFetch('https://api.covid19api.com/country/vietnam/status/confirmed?from=2022-02-01T00:00:00Z&to=2022-03-01T00:00:00Z')
 
   return (
     <table className="customers">
@@ -38,7 +16,7 @@ const Covid19 = () => {
         </tr>
       </thead>
       <tbody>
-        {loading == false && dataCovid && dataCovid.length > 0 && dataCovid.map(
+        {isLoading === false && dataCovid && dataCovid.length > 0 && dataCovid.map(
           item => {
             return (
               <tr key={item.Date}>
@@ -49,7 +27,7 @@ const Covid19 = () => {
             )
           }
         )}
-        {loading == true &&
+        {isLoading === true &&
           <tr>
             <td className='loading' colSpan={"3"}>Loading...</td>
           </tr>
