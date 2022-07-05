@@ -1,17 +1,22 @@
 import '../scss/Covid19.scss'
 import useFetch from '../createHook/fetch';
+import moment from 'moment';
 
 const Covid19 = () => {
 
-  const { data: dataCovid, isLoading } =
-    useFetch('https://api.covid19api.com/country/vietnam/status/confirmed?from=2022-02-01T00:00:00Z&to=2022-03-01T00:00:00Z')
+  const toDay = new Date(new Date().setHours(0, 0, 0, 0));
+  const priorDate = moment().subtract(30, 'days');
 
+  const { data: dataCovid, isLoading } =
+    useFetch(`https://api.covid19api.com/country/vietnam?from=${priorDate.toISOString()}&to=${toDay.toISOString()}`);
   return (
     <table className="customers">
       <thead>
         <tr>
-          <th>Cases</th>
-          <th>Status</th>
+          <th>Confirmed</th>
+          <th>Deaths</th>
+          <th>Recovered</th>
+          <th>Active</th>
           <th>Date</th>
         </tr>
       </thead>
@@ -19,9 +24,11 @@ const Covid19 = () => {
         {isLoading === false && dataCovid && dataCovid.length > 0 && dataCovid.map(
           item => {
             return (
-              <tr key={item.Date}>
-                <td>{item.Cases}</td>
-                <td>{item.Status}</td>
+              <tr key={item.ID}>
+                <td>{item.Confirmed}</td>
+                <td>{item.Deaths}</td>
+                <td>{item.Recovered}</td>
+                <td>{item.Active}</td>
                 <td>{item.Date}</td>
               </tr>
             )
@@ -29,7 +36,7 @@ const Covid19 = () => {
         )}
         {isLoading === true &&
           <tr>
-            <td className='loading' colSpan={"3"}>Loading...</td>
+            <td className='loading' colSpan={"5"}>Loading...</td>
           </tr>
         }
       </tbody>
