@@ -30,7 +30,11 @@ class CountDown extends React.Component {
 
   render() {
     return (
-      <div>{this.state.timeDown} class</div>
+      <>
+        <div>{this.state.timeDown} class</div>
+        <hr></hr>
+        <NewCountDown />
+      </>
     )
   }
 

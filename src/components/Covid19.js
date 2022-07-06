@@ -10,39 +10,41 @@ const Covid19 = () => {
   const { data: dataCovid, isLoading } =
     useFetch(`https://api.covid19api.com/country/vietnam?from=${priorDate.toISOString()}&to=${toDay.toISOString()}`);
   return (
-    <table className="customers">
-      <thead>
-        <tr>
-          <th>Confirmed</th>
-          <th>Deaths</th>
-          <th>Recovered</th>
-          <th>Active</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {isLoading === false && dataCovid && dataCovid.length > 0 && dataCovid.map(
-          item => {
-            return (
-              <tr key={item.ID}>
-                <td>{item.Confirmed}</td>
-                <td>{item.Deaths}</td>
-                <td>{item.Recovered}</td>
-                <td>{item.Active}</td>
-                <td>{item.Date}</td>
-              </tr>
-            )
-          }
-        )}
-        {isLoading === true &&
+    <>
+      <p>Covid 19 data show</p>
+      <table className="customers">
+        <thead>
           <tr>
-            <td className='loading' colSpan={"5"}>Loading...</td>
+            <th>Confirmed</th>
+            <th>Deaths</th>
+            <th>Recovered</th>
+            <th>Active</th>
+            <th>Date</th>
           </tr>
-        }
-      </tbody>
+        </thead>
+        <tbody>
+          {isLoading === false && dataCovid && dataCovid.length > 0 && dataCovid.map(
+            item => {
+              return (
+                <tr key={item.ID}>
+                  <td>{item.Confirmed}</td>
+                  <td>{item.Deaths}</td>
+                  <td>{item.Recovered}</td>
+                  <td>{item.Active}</td>
+                  <td>{item.Date}</td>
+                </tr>
+              )
+            }
+          )}
+          {isLoading === true &&
+            <tr>
+              <td className='loading' colSpan={"5"}>Loading...</td>
+            </tr>
+          }
+        </tbody>
 
-    </table>
-
+      </table>
+    </>
   );
 }
 

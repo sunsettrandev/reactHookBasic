@@ -4,10 +4,10 @@ const Nav = () => {
   return (
     <div className="headerBar">
       <ul>
-        <li><a className="active" href="#home">Home</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a className="active" href="/">Home</a></li>
+        <li><a href="/time-down">Time Down</a></li>
+        <li><a href="/todos-app">Todos App</a></li>
+        <li><a href="/secret">Secret</a></li>
       </ul>
     </div>
   );
